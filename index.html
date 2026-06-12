@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Air Quality Monitor</title>
+<title>AeroSense — Real-Time Air Quality Monitor</title>
+<meta name="description" content="AeroSense provides real-time air quality index (AQI) data, 7-day forecasts, and historical trends for cities worldwide. Built by Shivang Sinha.">
+<meta name="author" content="Shivang Sinha">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -444,7 +446,10 @@ footer {
 <body>
 <header>
   <div class="header-inner">
-    <h1>🌬 Air Quality</h1>
+    <div>
+      <h1 style="font-size:1.3rem;line-height:1.2">🌬 AeroSense</h1>
+      <div style="font-size:0.7rem;color:var(--text-secondary);letter-spacing:0.3px;text-transform:uppercase">Real-Time Air Quality Monitor</div>
+    </div>
     <div class="controls">
       <div class="search-wrapper">
         <div class="search-box">
@@ -472,7 +477,7 @@ footer {
   <div id="mainContent">
     <div class="dashboard-grid">
       <section class="card current-aqi-card" id="aqiCard">
-        <div class="location-name" id="locationName">Select a location</div>
+        <div class="location-name" id="locationName">Select a city to begin</div>
         <div class="location-sub" id="locationSub"></div>
         <div class="aqi-display">
           <div class="aqi-ring" id="aqiRing">
@@ -489,28 +494,32 @@ footer {
       </section>
       <section class="card charts-card">
         <div class="chart-container">
-          <h3>7-Day Forecast</h3>
+          <h3>7-Day AQI Forecast</h3>
           <canvas id="forecastChart"></canvas>
         </div>
         <div class="chart-container">
-          <h3>24-Hour Trend</h3>
+          <h3>24-Hour AQI Trend</h3>
           <canvas id="historyChart"></canvas>
         </div>
       </section>
     </div>
     <section class="card map-card">
-      <h2>📍 Air Quality Map</h2>
+      <h2>📍 Global AQI Map</h2>
       <div id="map" class="map-container"></div>
     </section>
     <section class="card comparison-card">
-      <h2>📊 Compare Cities</h2>
+      <h2>📊 City Comparison</h2>
       <div id="comparisonGrid" class="comparison-grid">
         <div class="comp-add" id="addCityPrompt">+ Search a city to get started</div>
       </div>
     </section>
   </div>
 </main>
-<footer>Data from <a href="https://open-meteo.com/" target="_blank" style="color:var(--text-secondary)">Open-Meteo</a> &amp; <a href="https://openstreetmap.org/" target="_blank" style="color:var(--text-secondary)">OpenStreetMap</a></footer>
+<footer>
+  <strong>AeroSense</strong> — Real-Time Air Quality Monitor &nbsp;·&nbsp; Built by <a href="https://github.com/Cod-ing-ki-ng" target="_blank" style="color:var(--text-secondary)">Shivang Sinha</a>
+  <br style="margin-top:4px;display:block;content:''">
+  <span style="font-size:0.75rem">Data from <a href="https://open-meteo.com/" target="_blank" style="color:var(--text-secondary)">Open-Meteo</a> &amp; <a href="https://openstreetmap.org/" target="_blank" style="color:var(--text-secondary)">OpenStreetMap</a></span>
+</footer>
 <div id="notifModal" class="modal-overlay hidden">
   <div class="modal-content">
     <h3>🔔 Notification Settings</h3>
@@ -666,7 +675,7 @@ function renderCurrentAQI(data, location) {
   progress.style.stroke = info.color;
 
   const pollutantsEl = document.getElementById('pollutants');
-  pollutantsEl.innerHTML = '<div style="font-weight:600;font-size:0.85rem;margin-bottom:8px;color:var(--text-secondary)">Pollutants</div>';
+  pollutantsEl.innerHTML = '<div style="font-weight:600;font-size:0.85rem;margin-bottom:8px;color:var(--text-secondary)">Pollutant Breakdown (US AQI)</div>';
   for (const p of POLLUTANTS) {
     const aqiVal = c[p.key];
     const concVal = c[p.concKey];
